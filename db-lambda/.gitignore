@@ -1,2 +1,3 @@
 node_modules
 src/handlers/**.js
+.aws-sam
