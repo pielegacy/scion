@@ -1,11 +1,14 @@
 {
     "compilerOptions": {
+        "rootDir": "src",
+        "outDir": "dist",
+        "target": "es2020",
+        "lib": [
+            "es2020",
+            "dom"
+        ],
         "module": "NodeNext",
-        "forceConsistentCasingInFileNames": true,
-        "target": "ES2022",
-        "strict": true
-    },
-    "exclude": [
-        "node_modules"
-    ]
+        "strict": true,
+        "forceConsistentCasingInFileNames": true
+    }
 }

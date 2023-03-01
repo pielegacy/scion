@@ -2,13 +2,15 @@
     "name": "replaced-by-user-input",
     "description": "replaced-by-user-input",
     "version": "0.0.1",
+    "type": "module",
     "private": true,
     "devDependencies": {
         "typescript": "4.9.5",
         "@types/aws-lambda": "8.10.111"
     },
     "scripts": {
-        "build": "tsc",
-        "start": "sam local start-api"
+        "build": "tsc && sam build",
+        "start-sam": "sam local invoke SyncDatabase",
+        "start-local": "node ./dist/local-entrypoint.mjs"
     }
 }
