@@ -5,7 +5,7 @@
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/format-version-structure.html
 AWSTemplateFormatVersion: 2010-09-09
 Description: >-
-  db-lambda
+  scion-lambda
 
 # Transform section specifies one or more macros that AWS CloudFormation uses to process your template
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/transform-section-structure.html
@@ -17,7 +17,7 @@ Transform:
 Resources:  
   # This is the Lambda function definition associated with the source code: sqs-payload-logger.js. For all available properties, see
   # https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
-  ScheduledEventLogger:
+  SyncDatabase:
     Type: AWS::Serverless::Function
     Properties:
       Description: A Lambda function that logs the payload of messages sent to an associated SQS queue.

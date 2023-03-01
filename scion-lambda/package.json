@@ -8,6 +8,7 @@
         "@types/aws-lambda": "8.10.111"
     },
     "scripts": {
-        "build": "tsc"
+        "build": "tsc",
+        "start": "sam local start-api"
     }
 }
