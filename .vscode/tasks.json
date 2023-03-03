@@ -7,7 +7,8 @@
 			"path": "scion-lambda",
 			"problemMatcher": [],
 			"label": "npm: start-local - scion-lambda",
-			"detail": "node ./dist/local-entrypoint.mjs"
+			"detail": "node ./dist/local-entrypoint.mjs",
+			"dependsOn": "tsc: build - scion-lambda/tsconfig.json"
 		},
 		{
 			"type": "typescript",

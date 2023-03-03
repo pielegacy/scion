@@ -1,17 +1,18 @@
-import { DynamoDBClient, CreateTableCommand } from "@aws-sdk/client-dynamodb";
+import { DynamoDBClient, CreateTableCommand,  } from "@aws-sdk/client-dynamodb";
 
-export const createClient = (): DynamoDBClient => {
+export const createDatabaseClient = (): DynamoDBClient => {
     if (process.env.USE_DYNAMO_LOCAL) {
         return new DynamoDBClient({
-            endpoint: "http://localhost:8000"
+            endpoint: "http://localhost:8000",
+            //TODO PROVIDER
         });
     }
 
     throw new Error("No DynamoDb configuration for current environment.");
 }
 
-export const provisionTable = (client: DynamoDBClient) => {
-    client.send(new CreateTableCommand({
+export const provisionTable = async (client: DynamoDBClient): Promise<void> => {
+    await client.send(new CreateTableCommand({
         TableName: "cards",
         KeySchema: [
             {

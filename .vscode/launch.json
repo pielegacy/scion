@@ -15,6 +15,7 @@
             "outFiles": [
                 "${workspaceFolder}/scion-lambda/dist/**/*.js"
             ],
+            "envFile": "${workspaceFolder}/scion-lambda/.env",
             "preLaunchTask": "tsc: build - scion-lambda/tsconfig.json",
             "pauseForSourceMap": true
         }
