@@ -4,13 +4,19 @@
     "version": "0.0.1",
     "type": "module",
     "private": true,
-    "devDependencies": {
-        "typescript": "4.9.5",
-        "@types/aws-lambda": "8.10.111"
-    },
     "scripts": {
         "build": "tsc && sam build",
         "start-sam": "sam local invoke SyncDatabase",
         "start-local": "node ./dist/local-entrypoint.mjs"
+    },
+    "dependencies": {
+        "@aws-sdk/client-dynamodb": "^3.282.0",
+        "dotenv": "^16.0.3"
+    },
+    "devDependencies": {
+        "@types/aws-lambda": "8.10.111",
+        "@types/dotenv": "^8.2.0",
+        "@types/node": "^18.14.5",
+        "typescript": "4.9.5"
     }
 }

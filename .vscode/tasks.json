@@ -1,0 +1,22 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "npm",
+			"script": "start-local",
+			"path": "scion-lambda",
+			"problemMatcher": [],
+			"label": "npm: start-local - scion-lambda",
+			"detail": "node ./dist/local-entrypoint.mjs"
+		},
+		{
+			"type": "typescript",
+			"tsconfig": "scion-lambda/tsconfig.json",
+			"problemMatcher": [
+				"$tsc"
+			],
+			"group": "build",
+			"label": "tsc: build - scion-lambda/tsconfig.json"
+		}
+	]
+}

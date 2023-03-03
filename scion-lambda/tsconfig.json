@@ -9,6 +9,8 @@
         ],
         "module": "NodeNext",
         "strict": true,
-        "forceConsistentCasingInFileNames": true
+        "forceConsistentCasingInFileNames": true,
+        "sourceMap": true,
+        "incremental": true
     }
 }
