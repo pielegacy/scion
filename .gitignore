@@ -1,0 +1,6 @@
+scion-lambda/.gitignore
+node_modules
+dist
+.aws-sam
+.env
+*.tsbuildinfo

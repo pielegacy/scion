@@ -1,13 +1,11 @@
+import { mapToInternalCard } from "../utils/mapping.js";
 import { fetchCardsFromSet } from "../utils/mtgjson.js"
-import { createDatabaseClient, provisionTable } from "../utils/storage.js";
+import { createDatabaseClient, provisionCardsTable, insertCards } from "../utils/storage.js";
 
 export const handler = async () => {
-    const client = await createDatabaseClient();
-    await provisionTable(client);
+    const client = createDatabaseClient();
+    await provisionCardsTable(client, true);
     
     const marchOfTheMachineCards = await fetchCardsFromSet("MOM");
-    
-    for (const card of marchOfTheMachineCards) {
-        
-    }
+    await insertCards(client, marchOfTheMachineCards.map(card => mapToInternalCard(card)));
 }
