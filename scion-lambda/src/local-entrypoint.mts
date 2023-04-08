@@ -1,3 +1,8 @@
-import { handler } from "./handlers/sync-database.mjs"
+import { syncDatabaseProcessor } from "./processors/syncDatabaseProcessor.js";
 
-await handler();
+await syncDatabaseProcessor({
+    sets: [
+        "BRO",
+        "MOM"
+    ]
+})
