@@ -6,7 +6,7 @@ const BATCH_SIZE_SAVE_DEFAULT = "10"
 const BATCH_SIZE_SAVE = parseInt(process.env.BATCH_SIZE_SAVE ?? BATCH_SIZE_SAVE_DEFAULT);
 const TABLE_NAME_CARDS = "cards";
 
-export const createDatabaseClient = (): DynamoDBClient => {
+export function createDatabaseClient(): DynamoDBClient {
     if (process.env.USE_DYNAMO_LOCAL) {
         return new DynamoDBClient({
             endpoint: "http://localhost:8000",
@@ -17,7 +17,7 @@ export const createDatabaseClient = (): DynamoDBClient => {
     throw new Error("No DynamoDb configuration for current environment.");
 }
 
-export const provisionCardsTable = async (client: DynamoDBClient, force: boolean = false): Promise<void> => {
+export async function provisionCardsTable(client: DynamoDBClient, force: boolean = false): Promise<void> {
     const createTableDefinition: CreateTableInput = {
         TableName: TABLE_NAME_CARDS,
         AttributeDefinitions: [
@@ -62,14 +62,14 @@ export const provisionCardsTable = async (client: DynamoDBClient, force: boolean
         } else {
             await client.send(new DeleteTableCommand({
                 TableName: TABLE_NAME_CARDS,
-            }))
+            }));
         }
     }
 
     await client.send(new CreateTableCommand(createTableDefinition));
 }
 
-export const insertCards = async (client: DynamoDBClient, cards: CardData[]) => {
+export async function insertCards(client: DynamoDBClient, cards: CardData[]) {
     const batches = batchArray(cards, BATCH_SIZE_SAVE);
     for (const batch of batches) {
         const writeCommandInput: BatchWriteItemCommandInput = {
@@ -87,6 +87,12 @@ export const insertCards = async (client: DynamoDBClient, cards: CardData[]) => 
     }
 }
 
+/**
+ * Maps an internal card to a DynamoDB record.
+ * 
+ * @param card the card to map to a DynamoDB record
+ * @returns A DynamoDB record
+ */
 const mapCardToRecord = (card: CardData): Record<string, AttributeValue> => ({
     "id": { "S": card.id },
     "setCode": { "S": card.setCode },
