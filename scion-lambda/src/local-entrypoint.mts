@@ -1,8 +1,9 @@
-import { syncDatabaseProcessor } from "./processors/syncDatabaseProcessor.js";
+import processor from "./processors/wizardProcessor.js";
+import { createDatabaseClient } from "./utils/storage.js";
 
-await syncDatabaseProcessor({
-    sets: [
-        "BRO",
-        "MOM"
-    ]
+const client = createDatabaseClient();
+
+await processor({
+    client,
+    setCode: "BRO",
 })

@@ -1,3 +1,6 @@
+/**
+ * The wrapper for all responses from MTGJSON
+ */
 export interface ResponseContainer<T> {
     meta: Meta;
     data: T;
@@ -143,3 +146,27 @@ export interface Identifiers {
     tcgplayerProductId?: string;
     tcgplayerEtchedProductId?: string;
 }
+
+export interface SetList {
+    baseSetSize: number;
+    block?: string;
+    code: string;
+    codeV3?: string;
+    isForeignOnly?: boolean;
+    isFoilOnly: boolean;
+    isNonFoilOnly?: boolean;
+    isOnlineOnly: boolean;
+    isPaperOnly?: boolean;
+    isPartialPreview?: boolean;
+    keyruneCode: string;
+    mcmId?: number;
+    mcmIdExtras?: number;
+    mcmName?: string;
+    mtgoCode?: string;
+    name: string;
+    parentCode?: string;
+    releaseDate: string;
+    tcgplayerGroupId?: number;
+    totalSetSize: number;
+    type: string;
+  };
