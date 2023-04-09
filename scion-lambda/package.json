@@ -5,7 +5,7 @@
     "type": "module",
     "private": true,
     "scripts": {
-        "build": "tsc && sam build"
+        "build": "npx esbuild src/handlers/advisor.mts src/handlers/artificer.mts src/handlers/wizard.mts --bundle --target=es2020 --outdir=dist/handlers && sam build"
     },
     "dependencies": {
         "@aws-sdk/client-dynamodb": "^3.282.0",
