@@ -5,9 +5,7 @@
     "type": "module",
     "private": true,
     "scripts": {
-        "build": "tsc && sam build",
-        "start-sam": "sam local invoke SyncDatabase",
-        "start-local": "node ./dist/local-entrypoint.mjs"
+        "build": "tsc && sam build"
     },
     "dependencies": {
         "@aws-sdk/client-dynamodb": "^3.282.0",
