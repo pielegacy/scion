@@ -4,3 +4,4 @@ dist
 .aws-sam
 .env
 *.tsbuildinfo
+scion-lambda/env.json
