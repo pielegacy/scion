@@ -12,28 +12,41 @@ Description: >-
 Transform:
 - AWS::Serverless-2016-10-31
 
-# Resources declares the AWS resources that you want to include in the stack
-# https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/resources-section-structure.html
 Resources:  
-  # This is the Lambda function definition associated with the source code: sqs-payload-logger.js. For all available properties, see
-  # https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
-  SyncDatabase:
+  Artificer:
     Type: AWS::Serverless::Function
     Properties:
-      Description: A Lambda function that logs the payload of messages sent to an associated SQS queue.
+      Description: Provisions a DynamoDB database for use with scion
       Runtime: nodejs18.x
       Architectures:
         - x86_64
       
       CodeUri: dist/handlers
-      Handler: sync-database.handler
-      # This property associates this Lambda function with a scheduled CloudWatch Event. For all available properties, see
-      # https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#schedule
-      # This example runs every hour.
-      Events:
-        CloudWatchEvent:
-          Type: Schedule
-          Properties:
-            Schedule: cron(0 * * * ? *)
+      Handler: wizard.handler
       MemorySize: 128
       Timeout: 100
+  Advisor:
+    Type: AWS::Serverless::Function
+    Properties:
+      Description: Pushes relevant set codes to the SQS queue used by Wizard
+      Runtime: nodejs18.x
+      Architectures:
+        - x86_64
+      
+      CodeUri: dist/handlers
+      Handler: wizard.handler
+      MemorySize: 128
+      Timeout: 100
+  Wizard:
+    Type: AWS::Serverless::Function
+    Properties:
+      Description: Syncs set data from an SQS message into a DynamoDB
+      Runtime: nodejs18.x
+      Architectures:
+        - x86_64
+      
+      CodeUri: dist/handlers
+      Handler: wizard.handler
+      MemorySize: 128
+      Timeout: 100
+  
