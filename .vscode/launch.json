@@ -8,15 +8,16 @@
             "type": "node",
             "request": "launch",
             "name": "Launch Program",
+            "smartStep": true,
             "skipFiles": [
                 "<node_internals>/**"
             ],
-            "program": "${workspaceFolder}/scion-lambda/dist/local-entrypoint.mjs",
+            "program": "${workspaceFolder}/scion-lambda/dist/local-entrypoint.js",
             "outFiles": [
                 "${workspaceFolder}/scion-lambda/dist/**/*.js"
             ],
             "envFile": "${workspaceFolder}/scion-lambda/.env",
-            "preLaunchTask": "tsc: build - scion-lambda/tsconfig.json",
+            "preLaunchTask": "npm: build-local-entrypoint - scion-lambda",
             "pauseForSourceMap": true
         }
     ]

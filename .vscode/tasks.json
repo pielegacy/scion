@@ -18,6 +18,25 @@
 			],
 			"group": "build",
 			"label": "tsc: build - scion-lambda/tsconfig.json"
+		},
+		{
+			"type": "npm",
+			"script": "build",
+			"path": "scion-lambda",
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"problemMatcher": [],
+			"label": "npm: build - scion-lambda"
+		},
+		{
+			"type": "npm",
+			"script": "build-local-entrypoint",
+			"path": "scion-lambda",
+			"group": "build",
+			"problemMatcher": [],
+			"label": "npm: build-local-entrypoint - scion-lambda"
 		}
 	]
 }
