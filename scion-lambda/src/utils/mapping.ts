@@ -1,4 +1,4 @@
-import { CardSet } from "../types/mtgjson.js";
+import { CardSet } from "../types/mtgjson/index.js";
 import { CardData } from "../types/scion.js";
 
 export const mapToInternalCard = (card: CardSet): CardData => ({
