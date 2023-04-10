@@ -14,9 +14,9 @@ namespace Scion.Lambda.Advisor
         /// <param name="input"></param>
         /// <param name="context"></param>
         /// <returns></returns>
-        public string FunctionHandler(string input, ILambdaContext context)
+        public IDictionary<string, string> FunctionHandler(Dictionary<string, string> input, ILambdaContext context)
         {
-            return input.ToUpper();
+            return input;
         }
     }
 }

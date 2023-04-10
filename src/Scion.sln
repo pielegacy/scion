@@ -5,6 +5,8 @@ VisualStudioVersion = 17.4.32804.182
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Scion.Lambda.Advisor", "Scion.Lambda.Advisor\src\Scion.Lambda.Advisor\Scion.Lambda.Advisor.csproj", "{0A1440F0-7C60-4F21-B226-AC9B05FFE852}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Scion.Lambda.Common", "Scion.Lambda.Common\Scion.Lambda.Common.csproj", "{65109701-325C-4B46-80CD-6D8E2E75221C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{0A1440F0-7C60-4F21-B226-AC9B05FFE852}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0A1440F0-7C60-4F21-B226-AC9B05FFE852}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0A1440F0-7C60-4F21-B226-AC9B05FFE852}.Release|Any CPU.Build.0 = Release|Any CPU
+		{65109701-325C-4B46-80CD-6D8E2E75221C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65109701-325C-4B46-80CD-6D8E2E75221C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65109701-325C-4B46-80CD-6D8E2E75221C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{65109701-325C-4B46-80CD-6D8E2E75221C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
