@@ -25,5 +25,5 @@ stages:
         functionName: ''
     - task: PublishBuildArtifacts@1
       inputs:
-        PathtoPublish: '$(Build.ArtifactStagingDirectory)/Scion.Lambda.Advisor'
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)/Scion.Lambda.Advisor.zip'
         ArtifactName: 'Scion.Lambda.Advisor'
