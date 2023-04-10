@@ -14,14 +14,15 @@ stages:
     - task: UseDotNet@2
       inputs:
         version: '6.x'
-    - task: DotNetCoreCLI@2
-      displayName: Publish
+    - task: LambdaNETCoreDeploy@1
       inputs:
-        command: publish
-        publishWebProjects: false
-        workingDirectory: '$(Build.SourcesDirectory)/src/Scion.Lambda.Advisor/src/Scion.Lambda.Advisor'
-        arguments: '--configuration Release -p:PublishReadyToRun=true --output $(Build.ArtifactStagingDirectory)/Scion.Lambda.Advisor'
-        zipAfterPublish: true
+        awsCredentials: 'AWS User'
+        regionName: 'ap-southeast-2'
+        command: 'deployFunction'
+        packageOnly: true
+        packageOutputFile: '$(Build.ArtifactStagingDirectory)/Scion.Lambda.Advisor.zip'
+        lambdaProjectPath: '$(Build.SourcesDirectory)/src/Scion.Lambda.Advisor/src/Scion.Lambda.Advisor'
+        functionName: ''
     - task: PublishBuildArtifacts@1
       inputs:
         PathtoPublish: '$(Build.ArtifactStagingDirectory)/Scion.Lambda.Advisor'
