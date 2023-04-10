@@ -16,5 +16,6 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Scion.Lambda.Common\Scion.Lambda.Common.csproj" />
+    <ProjectReference Include="..\..\..\Scion.Lambda.Common.Interface\Scion.Lambda.Common.Interface.csproj" />
   </ItemGroup>
 </Project>
