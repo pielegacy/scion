@@ -1,0 +1,24 @@
+pool:
+  vmImage: ubuntu-latest
+
+stages:
+- stage: Build
+  displayName: Build Lambdas
+  jobs:
+  - job: PublishLambdas
+    displayName: Publish Lambdas
+    steps:
+    - task: UseDotNet@2
+      inputs:
+        version: '6.x'
+    - task: DotNetCoreCLI@2
+      displayName: Restore Dependencies
+      inputs:
+        command: 'restore'
+    - task: DotNetCoreCLI@2
+      displayName: Publish Advisor
+      inputs:
+        command: publish
+        workingDirectory: Scion.Lambda.Advisor
+        arguments: '--configuration Release --output $(Build.ArtifactStagingDirectory)'
+        zipAfterPublish: true
