@@ -295,3 +295,4 @@ __pycache__/
 *.btm.cs
 *.odx.cs
 *.xsd.cs
+/src/Scion.Lambda.Advisor/src/Scion.Lambda.Advisor/payload.json

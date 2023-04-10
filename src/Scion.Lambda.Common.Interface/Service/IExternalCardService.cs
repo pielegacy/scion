@@ -14,7 +14,8 @@ namespace Scion.Lambda.Common.Interface.Service
         /// <summary>
         /// Returns a list of sets with metadata details.
         /// </summary>
+        /// <param name="filter">The filter to apply to the sets retrieved</param>
         /// <returns></returns>
-        Task<IEnumerable<SetDetails>> GetSetsAsync();
+        Task<IEnumerable<SetDetails>> GetSetsAsync(SetDetailsFilter filter);
     }
 }

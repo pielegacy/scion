@@ -10,17 +10,24 @@ namespace Scion.Lambda.Advisor
 {
     public class Function : BaseFunction
     {
-
         /// <summary>
         /// A simple function that takes a string and does a ToUpper
         /// </summary>
         /// <param name="input"></param>
         /// <param name="context"></param>
         /// <returns></returns>
-        public async Task<IEnumerable<SetDetails>> FunctionHandler(IEnumerable<string> input, ILambdaContext context)
+        public async Task<IEnumerable<SetDetails>> FunctionHandler(FunctionInput input, ILambdaContext context)
         {
-            var setLists = await ExternalCardService.GetSetsAsync();
+            var setLists = await ExternalCardService.GetSetsAsync(new SetDetailsFilter
+            {
+                After = input.After,
+            });
             return setLists;
+        }
+
+        public sealed class FunctionInput
+        {
+            public DateTime? After { get; set; }
         }
     }
 }
