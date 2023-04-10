@@ -3,11 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.32804.182
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Scion.Lambda.Advisor", "Scion.Lambda.Advisor\src\Scion.Lambda.Advisor\Scion.Lambda.Advisor.csproj", "{0A1440F0-7C60-4F21-B226-AC9B05FFE852}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Scion.Lambda.Advisor", "Scion.Lambda.Advisor\src\Scion.Lambda.Advisor\Scion.Lambda.Advisor.csproj", "{0A1440F0-7C60-4F21-B226-AC9B05FFE852}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Scion.Lambda.Common", "Scion.Lambda.Common\Scion.Lambda.Common.csproj", "{65109701-325C-4B46-80CD-6D8E2E75221C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Scion.Lambda.Common", "Scion.Lambda.Common\Scion.Lambda.Common.csproj", "{65109701-325C-4B46-80CD-6D8E2E75221C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Scion.Lambda.Common.Interface", "Scion.Lambda.Common.Interface\Scion.Lambda.Common.Interface.csproj", "{E3810DD8-A0A7-4BE5-BC5D-98AE8EC712D4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Scion.Lambda.Common.Interface", "Scion.Lambda.Common.Interface\Scion.Lambda.Common.Interface.csproj", "{E3810DD8-A0A7-4BE5-BC5D-98AE8EC712D4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Scion.Lambda.Artificer", "Scion.Lambda.Artificer\src\Scion.Lambda.Artificer\Scion.Lambda.Artificer.csproj", "{792E6BD9-140D-481A-BD0A-27E6CCD95A35}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Scion.Lambda.Wizard", "Scion.Lambda.Wizard\src\Scion.Lambda.Wizard\Scion.Lambda.Wizard.csproj", "{491A86DB-E7CC-46AE-8966-6D91B0AFA7AF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{4B49551A-6968-406C-83E5-B66C7C7E6BCD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,9 +33,21 @@ Global
 		{E3810DD8-A0A7-4BE5-BC5D-98AE8EC712D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E3810DD8-A0A7-4BE5-BC5D-98AE8EC712D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E3810DD8-A0A7-4BE5-BC5D-98AE8EC712D4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{792E6BD9-140D-481A-BD0A-27E6CCD95A35}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{792E6BD9-140D-481A-BD0A-27E6CCD95A35}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{792E6BD9-140D-481A-BD0A-27E6CCD95A35}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{792E6BD9-140D-481A-BD0A-27E6CCD95A35}.Release|Any CPU.Build.0 = Release|Any CPU
+		{491A86DB-E7CC-46AE-8966-6D91B0AFA7AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{491A86DB-E7CC-46AE-8966-6D91B0AFA7AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{491A86DB-E7CC-46AE-8966-6D91B0AFA7AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{491A86DB-E7CC-46AE-8966-6D91B0AFA7AF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{65109701-325C-4B46-80CD-6D8E2E75221C} = {4B49551A-6968-406C-83E5-B66C7C7E6BCD}
+		{E3810DD8-A0A7-4BE5-BC5D-98AE8EC712D4} = {4B49551A-6968-406C-83E5-B66C7C7E6BCD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {33F5CB1B-D996-468B-9E15-BC1F9A435C67}
