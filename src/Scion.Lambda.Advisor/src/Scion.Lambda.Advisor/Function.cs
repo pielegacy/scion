@@ -1,11 +1,14 @@
 using Amazon.Lambda.Core;
+using Scion.Lambda.Common;
+using Scion.Lambda.Common.Interface.Models;
+using System.Collections;
 
 // Assembly attribute to enable the Lambda function's JSON input to be converted into a .NET class.
 [assembly: LambdaSerializer(typeof(Amazon.Lambda.Serialization.SystemTextJson.DefaultLambdaJsonSerializer))]
 
 namespace Scion.Lambda.Advisor
 {
-    public class Function
+    public class Function : BaseFunction
     {
 
         /// <summary>
@@ -14,9 +17,10 @@ namespace Scion.Lambda.Advisor
         /// <param name="input"></param>
         /// <param name="context"></param>
         /// <returns></returns>
-        public IDictionary<string, string> FunctionHandler(Dictionary<string, string> input, ILambdaContext context)
+        public async Task<IEnumerable<SetDetails>> FunctionHandler(IEnumerable<string> input, ILambdaContext context)
         {
-            return input;
+            var setLists = await ExternalCardService.GetSetsAsync();
+            return setLists;
         }
     }
 }

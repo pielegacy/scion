@@ -6,8 +6,10 @@ using System.Net.Http.Json;
 using System.Threading.Tasks;
 using Scion.Lambda.Common.Configuration;
 using Scion.Lambda.Common.Interface.Exceptions;
+using Scion.Lambda.Common.Interface.Models;
 using Scion.Lambda.Common.Interface.Models.External;
 using Scion.Lambda.Common.Interface.Service;
+using Scion.Lambda.Common.Mapping;
 
 namespace Scion.Lambda.Common
 {
@@ -15,6 +17,7 @@ namespace Scion.Lambda.Common
     {
         private readonly ExternalCardServiceConfiguration _configuration;
         private readonly HttpClient _httpClient;
+        private readonly ExternalDataMapper _mapper;
 
         private static class ExternalPaths
         {
@@ -25,10 +28,11 @@ namespace Scion.Lambda.Common
         {
             _configuration = configuration;
             _httpClient = new HttpClient();
+            _mapper = new ExternalDataMapper();
         }
 
-        public async Task<IEnumerable<SetList>> GetSetListsAsync() => 
-            await GetExternalData<IEnumerable<SetList>>(ExternalPaths.GetSetLists);
+        public async Task<IEnumerable<SetDetails>> GetSetsAsync() => 
+            _mapper.ToSetDetails(await GetExternalData<IEnumerable<SetList>>(ExternalPaths.GetSetLists));
 
         private async Task<TData> GetExternalData<TData>(string path) where TData : class
         {

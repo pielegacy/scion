@@ -1,3 +1,4 @@
+using Scion.Lambda.Common.Interface.Models;
 using Scion.Lambda.Common.Interface.Models.External;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -11,9 +12,9 @@ namespace Scion.Lambda.Common.Interface.Service
     public interface IExternalCardService
     {
         /// <summary>
-        /// Returns all the set lists which can be used for viewing metadata about sets.
+        /// Returns a list of sets with metadata details.
         /// </summary>
         /// <returns></returns>
-        Task<IEnumerable<SetList>> GetSetListsAsync();
+        Task<IEnumerable<SetDetails>> GetSetsAsync();
     }
 }

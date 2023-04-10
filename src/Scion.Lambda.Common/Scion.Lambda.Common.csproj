@@ -1,6 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
+    <PackageReference Include="Riok.Mapperly" Version="2.7.0" />
     <PackageReference Include="System.Net.Http.Json" Version="7.0.1" />
   </ItemGroup>
 
@@ -9,7 +10,7 @@
   </ItemGroup>
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.1</TargetFramework>
+    <TargetFramework>net6</TargetFramework>
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
