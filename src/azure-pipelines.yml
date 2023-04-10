@@ -18,6 +18,7 @@ stages:
       displayName: Publish Advisor
       inputs:
         command: publish
+        publishWebProjects: false
         workingDirectory: Scion.Lambda.Advisor
         arguments: '--configuration Release --output $(Build.ArtifactStagingDirectory)'
         zipAfterPublish: true
