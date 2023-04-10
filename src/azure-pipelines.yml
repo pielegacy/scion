@@ -12,10 +12,6 @@ stages:
       inputs:
         version: '6.x'
     - task: DotNetCoreCLI@2
-      displayName: Restore Dependencies
-      inputs:
-        command: 'restore'
-    - task: DotNetCoreCLI@2
       displayName: Publish Advisor
       inputs:
         command: publish
