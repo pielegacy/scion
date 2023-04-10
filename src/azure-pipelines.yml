@@ -1,6 +1,9 @@
 pool:
   vmImage: ubuntu-latest
 
+trigger: 
+- main
+
 stages:
 - stage: Build
   displayName: Build Lambdas
