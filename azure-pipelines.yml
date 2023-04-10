@@ -6,19 +6,19 @@ trigger:
 
 stages:
 - stage: Build
-  displayName: Build Lambdas
+  displayName: Publish Lambdas
   jobs:
-  - job: PublishLambdas
-    displayName: Publish Lambdas
+  - job: PublishAdvisor
+    displayName: Publish Advisor
     steps:
     - task: UseDotNet@2
       inputs:
         version: '6.x'
     - task: DotNetCoreCLI@2
-      displayName: Publish Advisor
+      displayName: Publish
       inputs:
         command: publish
         publishWebProjects: false
         workingDirectory: '$(Build.SourcesDirectory)/src/Scion.Lambda.Advisor/src/Scion.Lambda.Advisor'
-        arguments: '--configuration Release --output $(Build.ArtifactStagingDirectory)'
+        arguments: '--configuration Release -p:PublishReadyToRun=true --output $(Build.ArtifactStagingDirectory)'
         zipAfterPublish: true
