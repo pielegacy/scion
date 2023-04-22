@@ -19,7 +19,6 @@ stages:
         awsCredentials: 'AWS User'
         regionName: 'ap-southeast-2'
         command: 'deployFunction'
-        packageOnly: true
         packageOutputFile: '$(Build.ArtifactStagingDirectory)/Scion.Lambda.Advisor.zip'
         lambdaProjectPath: '$(Build.SourcesDirectory)/src/Scion.Lambda.Advisor/src/Scion.Lambda.Advisor'
         functionName: 'scion-advisor'
