@@ -5,7 +5,7 @@ trigger:
 - main
 
 stages:
-- stage: Build
+- stage: Publish
   displayName: Publish Lambdas
   jobs:
   - job: PublishAdvisor
@@ -22,8 +22,4 @@ stages:
         packageOnly: true
         packageOutputFile: '$(Build.ArtifactStagingDirectory)/Scion.Lambda.Advisor.zip'
         lambdaProjectPath: '$(Build.SourcesDirectory)/src/Scion.Lambda.Advisor/src/Scion.Lambda.Advisor'
-        functionName: ''
-    - task: PublishBuildArtifacts@1
-      inputs:
-        PathtoPublish: '$(Build.ArtifactStagingDirectory)/Scion.Lambda.Advisor.zip'
-        ArtifactName: 'Scion.Lambda.Advisor'
+        functionName: 'scion-advisor'
