@@ -19,6 +19,8 @@ namespace Scion.Lambda.Common
             Configuration = new ConfigurationBuilder()
                             .SetBasePath(Environment.CurrentDirectory)
                             .AddJsonFile("appsettings.json")
+                            .AddEnvironmentVariables()
+                            .AddUserSecrets<BaseFunction>(true)
                             .Build();
 
             Logger = LoggerFactory
