@@ -1,17 +1,18 @@
 ﻿using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Configuration.Json;
+using Microsoft.Extensions.Logging;
 using Scion.Lambda.Common.Configuration;
 using Scion.Lambda.Common.Interface.Service;
+using Scion.Lambda.Common.Service;
 using System;
-using System.IO;
 
 namespace Scion.Lambda.Common
 {
     public abstract class BaseFunction
     {
-        public IConfiguration Configuration { get; set; }
-
-        public IExternalCardService ExternalCardService { get; }
+        protected IConfiguration Configuration { get; set; }
+        protected ILogger Logger { get; }
+        protected IExternalCardService ExternalCardService { get; }
+        protected IQueueOutputService QueueOutputService { get; }
 
         public BaseFunction()
         {
@@ -20,12 +21,18 @@ namespace Scion.Lambda.Common
                             .AddJsonFile("appsettings.json")
                             .Build();
 
+            Logger = LoggerFactory
+                .Create(options => options.AddJsonConsole())
+                .CreateLogger(GetType().Name);
+
             var externalCardServiceConfiguration = Configuration
                 .GetSection(ExternalCardServiceConfiguration.ConfigurationSection)
                 .Get<ExternalCardServiceConfiguration>()
                 ?? throw new ArgumentException($"No configuration provided in appsettings section '${ExternalCardServiceConfiguration.ConfigurationSection}'");
 
             ExternalCardService = new ExternalCardService(externalCardServiceConfiguration);
+            QueueOutputService = new QueueOutputService(Configuration, Logger);
+
         }
 
     }

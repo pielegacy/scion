@@ -1,6 +1,8 @@
 using Amazon.Lambda.Core;
+using Amazon.SQS;
 using Scion.Lambda.Common;
 using Scion.Lambda.Common.Interface.Models;
+using System.Text.Json;
 using System.Collections;
 
 // Assembly attribute to enable the Lambda function's JSON input to be converted into a .NET class.
@@ -22,6 +24,12 @@ namespace Scion.Lambda.Advisor
             {
                 After = input.After,
             });
+
+            foreach (var set in setLists)
+            {
+                await QueueOutputService.QueueSuccessAsync(set);
+            }
+
             return setLists;
         }
 
