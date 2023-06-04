@@ -45,11 +45,11 @@ namespace Scion.Lambda.Common
             return _mapper.ToSetMetaList(ApplyFilter(filter, setLists));
         }
 
-        public async Task<IEnumerable<SetCard>> GetSetCardsAsync(string inputCode)
+        public async Task<IEnumerable<Card>> GetCardsAsync(string inputCode)
         {
             var setDetails = await GetExternalData<SetDetails>(string.Format(ExternalPaths.GetSetContents, inputCode));
             
-            return setDetails.Cards;
+            return _mapper.ToCards(setDetails.Cards);
         }
 
         private IEnumerable<SetList> ApplyFilter(SetMetaFilter filter, IEnumerable <SetList> setLists)

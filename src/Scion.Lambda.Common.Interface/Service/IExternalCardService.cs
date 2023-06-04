@@ -11,7 +11,12 @@ namespace Scion.Lambda.Common.Interface.Service
     /// <remarks>Currently the external service used for card data is MTGJson</remarks>
     public interface IExternalCardService
     {
-        Task<IEnumerable<SetCard>> GetSetCardsAsync(string inputCode);
+        /// <summary>
+        /// Returns all the cards in a specific set
+        /// </summary>
+        /// <param name="inputCode">The set code to search by</param>
+        /// <returns></returns>
+        Task<IEnumerable<Card>> GetCardsAsync(string inputCode);
 
         /// <summary>
         /// Returns a list of sets with metadata details.

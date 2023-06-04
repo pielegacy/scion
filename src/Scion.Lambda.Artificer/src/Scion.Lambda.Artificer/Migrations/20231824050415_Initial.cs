@@ -12,7 +12,7 @@ namespace Scion.Lambda.Artificer.Migrations
     {
         public override void Up()
         {
-            Create.Table("Cards")
+            Create.Table("cards")
                 .WithColumn("id").AsGuid().PrimaryKey()
                 .WithColumn("data").AsCustom("json").NotNullable();
         }

@@ -18,7 +18,16 @@ namespace Scion.Lambda.Wizard
         {
             Logger.LogInformation("Processing set {0}", input.Code);
 
-            var cards = await ExternalCardService.GetSetCardsAsync(input.Code);
+            var cards = await ExternalCardService.GetCardsAsync(input.Code);
+
+            using var repository = CreateRepository();
+
+            await repository.PurgeCardsAsync();
+            
+            foreach (var card in cards)
+            {
+                await repository.SaveCardAsync(card);
+            }
 
             return input.Code;
         }

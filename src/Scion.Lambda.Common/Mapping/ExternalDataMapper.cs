@@ -9,5 +9,10 @@ namespace Scion.Lambda.Common.Mapping
     public partial class ExternalDataMapper
     {
         public partial IEnumerable<SetMeta> ToSetMetaList(IEnumerable<SetList> setList);
+
+        [MapProperty("Identifiers.ExternalId", "Id")]
+        public partial Card ToCard(SetCard card);
+
+        public partial IEnumerable<Card> ToCards(IEnumerable<SetCard> cards);
     }
 }

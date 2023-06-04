@@ -2,7 +2,9 @@
 using Microsoft.Extensions.Logging;
 using Scion.Lambda.Common.Configuration;
 using Scion.Lambda.Common.Interface.Service;
+using Scion.Lambda.Common.Interface.Service.Data;
 using Scion.Lambda.Common.Service;
+using Scion.Lambda.Common.Service.Data;
 using System;
 
 namespace Scion.Lambda.Common
@@ -34,5 +36,7 @@ namespace Scion.Lambda.Common
             ExternalCardService = new ExternalCardService(externalCardServiceConfiguration);
             QueueOutputService = new QueueOutputService(Configuration, Logger);
         }
+
+        protected IChaliceRepository CreateRepository() => new ChaliceRepository(Configuration);
     }
 }
