@@ -19,12 +19,12 @@ namespace Scion.Lambda.Advisor
         /// <param name="input"></param>
         /// <param name="context"></param>
         /// <returns></returns>
-        public async Task<IEnumerable<SetDetails>> FunctionHandler(FunctionInput input, ILambdaContext context)
+        public async Task<IEnumerable<SetMeta>> FunctionHandler(FunctionInput input, ILambdaContext context)
         {
             using var functionScope = Logger.BeginScope(input);
 
             Logger.LogInformation("Querying sets");
-            var setLists = await ExternalCardService.GetSetsAsync(new SetDetailsFilter
+            var setLists = await ExternalCardService.GetSetsAsync(new SetMetaFilter
             {
                 After = input.After,
             });

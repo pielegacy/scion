@@ -1,10 +1,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Runtime.CompilerServices;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using Scion.Lambda.Common.Configuration;
 using Scion.Lambda.Common.Interface.Exceptions;
@@ -23,7 +26,10 @@ namespace Scion.Lambda.Common
 
         private static class ExternalPaths
         {
+            public const string GetSetContents = "/{0}.json";
+
             public const string GetSetLists = "/SetList.json";
+
         }
 
         public ExternalCardService(ExternalCardServiceConfiguration configuration)
@@ -33,13 +39,20 @@ namespace Scion.Lambda.Common
             _mapper = new ExternalDataMapper();
         }
 
-        public async Task<IEnumerable<SetDetails>> GetSetsAsync(SetDetailsFilter filter)
+        public async Task<IEnumerable<SetMeta>> GetSetsAsync(SetMetaFilter filter)
         {
             var setLists = await GetExternalData<IEnumerable<SetList>>(ExternalPaths.GetSetLists);
-            return _mapper.ToSetDetails(ApplyFilter(filter, setLists));
+            return _mapper.ToSetMetaList(ApplyFilter(filter, setLists));
         }
 
-        private IEnumerable<SetList> ApplyFilter(SetDetailsFilter filter, IEnumerable <SetList> setLists)
+        public async Task<IEnumerable<SetCard>> GetSetCardsAsync(string inputCode)
+        {
+            var setDetails = await GetExternalData<SetDetails>(string.Format(ExternalPaths.GetSetContents, inputCode));
+            
+            return setDetails.Cards;
+        }
+
+        private IEnumerable<SetList> ApplyFilter(SetMetaFilter filter, IEnumerable <SetList> setLists)
         {
             var result = setLists;
 

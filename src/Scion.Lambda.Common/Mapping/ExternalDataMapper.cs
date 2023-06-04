@@ -8,6 +8,6 @@ namespace Scion.Lambda.Common.Mapping
     [Mapper]
     public partial class ExternalDataMapper
     {
-        public partial IEnumerable<SetDetails> ToSetDetails(IEnumerable<SetList> setList);
+        public partial IEnumerable<SetMeta> ToSetMetaList(IEnumerable<SetList> setList);
     }
 }

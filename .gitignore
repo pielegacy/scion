@@ -296,3 +296,6 @@ __pycache__/
 *.odx.cs
 *.xsd.cs
 /src/Scion.Lambda.Advisor/src/Scion.Lambda.Advisor/payload.json
+
+# Scion specific ignores
+**/Static/MockAPI/**

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Scion.Lambda.Common.Interface.Models
 {
-    public sealed class SetDetailsFilter
+    public sealed class SetMetaFilter
     {
         public DateTime? After { get; set; }
     }
