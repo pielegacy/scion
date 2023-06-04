@@ -1,6 +1,5 @@
 using Amazon.Lambda.Core;
 using FluentMigrator.Runner;
-using FluentMigrator.Runner.Initialization;
 using Microsoft.Extensions.DependencyInjection;
 using Scion.Lambda.Common;
 
@@ -9,21 +8,26 @@ using Scion.Lambda.Common;
 
 namespace Scion.Lambda.Artificer
 {
-    public class Function : BaseFunction
+    public sealed class Function : BaseFunction
     {
+        public IMigrationRunner MigrationRunner { get; }
 
-        /// <summary>
-        /// A simple function that takes a string and does a ToUpper
-        /// </summary>
-        /// <param name="input"></param>
-        /// <param name="context"></param>
-        /// <returns></returns>
-        public void FunctionHandler(string input, ILambdaContext context)
+        public Function() : base()
         {
-            
+            var services = new ServiceCollection()
+                .RegisterServices(Configuration)
+                .BuildServiceProvider();
+
+            MigrationRunner = services.GetRequiredService<IMigrationRunner>();
         }
 
-        private IServiceProvider Services => new ServiceCollection()
-            .AddFluentMigratorCore()
+        public void FunctionHandler(FunctionInput input, ILambdaContext context)
+        {
+            MigrationRunner.MigrateUp();
+        }
+
+        public sealed class FunctionInput
+        {
+        }
     }
 }

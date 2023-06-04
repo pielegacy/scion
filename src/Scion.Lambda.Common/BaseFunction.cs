@@ -20,7 +20,6 @@ namespace Scion.Lambda.Common
                             .SetBasePath(Environment.CurrentDirectory)
                             .AddJsonFile("appsettings.json")
                             .AddEnvironmentVariables()
-                            .AddUserSecrets<BaseFunction>(true)
                             .Build();
 
             Logger = LoggerFactory
@@ -34,8 +33,6 @@ namespace Scion.Lambda.Common
 
             ExternalCardService = new ExternalCardService(externalCardServiceConfiguration);
             QueueOutputService = new QueueOutputService(Configuration, Logger);
-
         }
-
     }
 }
