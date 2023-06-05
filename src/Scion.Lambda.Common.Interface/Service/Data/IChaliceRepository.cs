@@ -9,6 +9,6 @@ namespace Scion.Lambda.Common.Interface.Service.Data
     public interface IChaliceRepository : IDisposable
     {
         Task PurgeCardsAsync();
-        Task SaveCardAsync(Card card);
+        Task SaveCardsAsync(IEnumerable<Card> cards);
     }
 }

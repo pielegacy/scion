@@ -14,7 +14,8 @@ namespace Scion.Lambda.Artificer.Migrations
         {
             Create.Table("cards")
                 .WithColumn("id").AsGuid().PrimaryKey()
-                .WithColumn("data").AsCustom("json").NotNullable();
+                .WithColumn("name").AsString().NotNullable()
+                .WithColumn("identity").AsCustom("text[]").NotNullable();
         }
 
         public override void Down()

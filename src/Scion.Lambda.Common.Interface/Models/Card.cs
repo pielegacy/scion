@@ -11,5 +11,7 @@ namespace Scion.Lambda.Common.Interface.Models
         public Guid Id { get; set; } = Guid.Empty;
 
         public string Name { get; set; } = string.Empty;
+
+        public IEnumerable<string> ColorIdentity { get; set; } = Enumerable.Empty<string>();
     }
 }

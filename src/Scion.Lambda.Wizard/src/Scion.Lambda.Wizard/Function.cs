@@ -23,11 +23,8 @@ namespace Scion.Lambda.Wizard
             using var repository = CreateRepository();
 
             await repository.PurgeCardsAsync();
-            
-            foreach (var card in cards)
-            {
-                await repository.SaveCardAsync(card);
-            }
+
+            await repository.SaveCardsAsync(cards);
 
             return input.Code;
         }

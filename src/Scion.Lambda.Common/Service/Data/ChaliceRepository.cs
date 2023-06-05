@@ -39,16 +39,24 @@ namespace Scion.Lambda.Common.Service.Data
             await Connection.Value.ExecuteAsync("TRUNCATE cards");
         }
 
-        public async Task SaveCardAsync(Card card)
+        public async Task SaveCardsAsync(IEnumerable<Card> cards)
         {
-            await Connection.Value.ExecuteAsync(
-                @"INSERT INTO public.cards (id, data) VALUES (@Id, @Data);",
-                new
-                {
-                    card.Id,
-                    Data = JsonParameter.Create(card),
-                }
-            );
+            using var transaction = Connection.Value.BeginTransaction();
+
+            foreach (var card in cards)
+            {
+                await Connection.Value.ExecuteAsync(
+                    @"INSERT INTO public.cards (id, name, identity) VALUES (@Id, @Name, @ColorIdentity);",
+                    new
+                    {
+                        card.Id,
+                        card.Name,
+                        card.ColorIdentity,
+                    }
+                );
+            }
+
+            transaction.Commit();
         }
 
         public void Dispose()

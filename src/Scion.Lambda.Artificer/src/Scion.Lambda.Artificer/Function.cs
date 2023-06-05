@@ -1,7 +1,10 @@
 using Amazon.Lambda.Core;
+using Dapper;
 using FluentMigrator.Runner;
 using Microsoft.Extensions.DependencyInjection;
+using Npgsql;
 using Scion.Lambda.Common;
+using Scion.Lambda.Common.Extensions;
 
 // Assembly attribute to enable the Lambda function's JSON input to be converted into a .NET class.
 [assembly: LambdaSerializer(typeof(Amazon.Lambda.Serialization.SystemTextJson.DefaultLambdaJsonSerializer))]
