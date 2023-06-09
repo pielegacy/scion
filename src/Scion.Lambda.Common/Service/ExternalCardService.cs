@@ -35,7 +35,10 @@ namespace Scion.Lambda.Common
         public ExternalCardService(ExternalCardServiceConfiguration configuration)
         {
             _configuration = configuration;
-            _httpClient = new HttpClient();
+            _httpClient = new HttpClient
+            {
+                Timeout = TimeSpan.FromMinutes(10),
+            };
             _mapper = new ExternalDataMapper();
         }
 

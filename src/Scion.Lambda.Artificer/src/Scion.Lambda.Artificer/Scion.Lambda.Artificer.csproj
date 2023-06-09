@@ -32,6 +32,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Procedures\" />
+    <Folder Include="Scripts\" />
   </ItemGroup>
 </Project>
