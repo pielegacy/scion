@@ -1,6 +1,7 @@
 using Scion.Lambda.Common.Interface.Models;
 using Scion.Lambda.Common.Interface.Models.External;
 using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
 
 namespace Scion.Lambda.Common.Interface.Service
@@ -11,6 +12,8 @@ namespace Scion.Lambda.Common.Interface.Service
     /// <remarks>Currently the external service used for card data is MTGJson</remarks>
     public interface IExternalCardService
     {
+        Task<Stream> GetCardsAsStreamAsync(string inputCode);
+
         /// <summary>
         /// Returns all the cards in a specific set
         /// </summary>

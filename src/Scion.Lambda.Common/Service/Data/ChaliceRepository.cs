@@ -13,6 +13,7 @@ using Dapper;
 using System.Text.Json;
 using Scion.Lambda.Common.Extensions;
 using Scion.Lambda.Common.Service.Data.Parameters;
+using System.IO;
 
 namespace Scion.Lambda.Common.Service.Data
 {
@@ -34,9 +35,25 @@ namespace Scion.Lambda.Common.Service.Data
 
         public ChaliceRepository(IConfiguration configuration) : this(configuration.GetChaliceConfiguration()) { }
 
-        public async Task PurgeCardsAsync()
+        public async Task SaveSetCardsAsync(string setCode, Stream stream)
         {
-            await Connection.Value.ExecuteAsync("TRUNCATE cards");
+            using var reader = new StreamReader(stream, Encoding.UTF8);
+           
+            using var transaction = Connection.Value.BeginTransaction();
+
+            await transaction.Connection.ExecuteAsync("DELETE FROM external_data.sets WHERE code = @SetCode",
+                new
+                {
+                    setCode
+                });
+            await transaction.Connection.ExecuteAsync("INSERT INTO external_data.sets (code, data) VALUES (@SetCode, @Data);",
+                new
+                {
+                    setCode,
+                    data = new JsonBytesParameter(Encoding.UTF8.GetBytes(await reader.ReadToEndAsync()))
+                });
+
+            transaction.Commit();
         }
 
         public async Task SaveCardsAsync(IEnumerable<Card> cards)

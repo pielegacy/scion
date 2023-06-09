@@ -12,10 +12,12 @@ namespace Scion.Lambda.Artificer.Migrations
     {
         public override void Up()
         {
-            Create.Table("cards")
-                .WithColumn("id").AsGuid().PrimaryKey()
-                .WithColumn("name").AsString().NotNullable()
-                .WithColumn("identity").AsCustom("text[]").NotNullable();
+            Create.Schema("external_data");
+
+            Create.Table("sets")
+                .InSchema("external_data")
+                .WithColumn("code").AsString().PrimaryKey()
+                .WithColumn("data").AsCustom("jsonb").NotNullable();
         }
 
         public override void Down()

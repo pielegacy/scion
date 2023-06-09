@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.Json;
@@ -10,20 +11,18 @@ using static Dapper.SqlMapper;
 
 namespace Scion.Lambda.Common.Service.Data.Parameters
 {
-    internal sealed class JsonParameter : ICustomQueryParameter
+    internal sealed class JsonBytesParameter : ICustomQueryParameter
     {
-        private readonly string _value;
+        private readonly Byte[] _value;
 
-        internal JsonParameter(string value)
+        public JsonBytesParameter(Byte[] value)
         {
             _value = value;
         }
 
-        public static JsonParameter Create<TData>(TData value) => new(JsonSerializer.Serialize(value));
-
         public void AddParameter(IDbCommand command, string name)
         {
-            var parameter = new NpgsqlParameter(name, NpgsqlTypes.NpgsqlDbType.Json)
+            var parameter = new NpgsqlParameter(name, NpgsqlTypes.NpgsqlDbType.Jsonb)
             {
                 Value = _value
             };

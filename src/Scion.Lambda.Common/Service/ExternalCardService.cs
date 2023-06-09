@@ -41,15 +41,20 @@ namespace Scion.Lambda.Common
 
         public async Task<IEnumerable<SetMeta>> GetSetsAsync(SetMetaFilter filter)
         {
-            var setLists = await GetExternalData<IEnumerable<SetList>>(ExternalPaths.GetSetLists);
+            var setLists = await GetExternalDataAsync<IEnumerable<SetList>>(ExternalPaths.GetSetLists);
             return _mapper.ToSetMetaList(ApplyFilter(filter, setLists));
         }
 
         public async Task<IEnumerable<Card>> GetCardsAsync(string inputCode)
         {
-            var setDetails = await GetExternalData<SetDetails>(string.Format(ExternalPaths.GetSetContents, inputCode));
+            var setDetails = await GetExternalDataAsync<SetDetails>(string.Format(ExternalPaths.GetSetContents, inputCode));
             
             return _mapper.ToCards(setDetails.Cards);
+        }
+
+        public async Task<Stream> GetCardsAsStreamAsync(string inputCode)
+        {
+            return await GetExternalDataStreamAsync(string.Format(ExternalPaths.GetSetContents, inputCode));
         }
 
         private IEnumerable<SetList> ApplyFilter(SetMetaFilter filter, IEnumerable <SetList> setLists)
@@ -64,14 +69,29 @@ namespace Scion.Lambda.Common
             return result;
         }
 
-        private async Task<TData> GetExternalData<TData>(string path) where TData : class
+        private string FormatUrl(string path)
         {
             if (path[0] != '/')
             {
                 throw new ArgumentException("External data request paths must start with a '/'", nameof(path));
             }
 
-            string url = _configuration.BaseUrl + path;
+            return _configuration.BaseUrl + path;
+        }
+
+        private async Task<Stream> GetExternalDataStreamAsync(string path)
+        {
+            string url = FormatUrl(path);
+            var response = await _httpClient.GetAsync(url);
+
+            response.EnsureSuccessStatusCode();
+
+            return await response.Content.ReadAsStreamAsync();
+        }
+
+        private async Task<TData> GetExternalDataAsync<TData>(string path) where TData : class
+        {
+            string url = FormatUrl(path);
             var responseContainer = await _httpClient.GetFromJsonAsync<ResponseContainer<TData>>(url);
             if (responseContainer?.Data is null)
             {

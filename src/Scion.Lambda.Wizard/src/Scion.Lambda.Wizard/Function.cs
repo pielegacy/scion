@@ -2,6 +2,7 @@ using Amazon.Lambda.Core;
 using Microsoft.Extensions.Logging;
 using Scion.Lambda.Common;
 using Scion.Lambda.Common.Interface.Models;
+using System.Text;
 
 [assembly: LambdaSerializer(typeof(Amazon.Lambda.Serialization.SystemTextJson.DefaultLambdaJsonSerializer))]
 namespace Scion.Lambda.Wizard
@@ -18,13 +19,10 @@ namespace Scion.Lambda.Wizard
         {
             Logger.LogInformation("Processing set {0}", input.Code);
 
-            var cards = await ExternalCardService.GetCardsAsync(input.Code);
-
+            using var cardStream = await ExternalCardService.GetCardsAsStreamAsync(input.Code);
             using var repository = CreateRepository();
 
-            await repository.PurgeCardsAsync();
-
-            await repository.SaveCardsAsync(cards);
+            await repository.SaveSetCardsAsync(input.Code, cardStream);
 
             return input.Code;
         }
