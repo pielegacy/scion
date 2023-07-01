@@ -27,7 +27,16 @@ test('Check Games Portal Pricing', async ({ page }) => {
     if (pagePrice) {
         prices.push(pagePrice);
     }
-    hasNextPage = false;
+    hasNextPage = await page.$$eval(".pag_next a", nextPageButtons => {
+        return nextPageButtons[0] != null;
+    });
+
+    if (hasNextPage) {
+        await page
+            .locator(".pag_next a")
+            .click();
+        await page.waitForTimeout(1000);
+    }
     // }
 
     const result = prices.reduce((lowest, current) => {
